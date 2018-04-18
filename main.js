@@ -9,9 +9,23 @@ app.set('view engine', 'pug');
 // 设置静态资源托管
 app.use('/static', express.static('public'));
 
-// 路由
-app.get('/', function(req, res) {
+// 首页路由
+app.get('/admin', function(req, res) {
 	res.render('index');
+});
+
+app.get('/admin/column', require('./routers/column_router'));
+app.get('/admin/content', require('./routers/content_router'));
+
+
+// 连接数据库
+// http://10.0.15.33:27017/
+mongoose.connect('mongodb://10.0.15.33:27017/', function(err) {
+	if(err) {
+		console.log('链接数据库失败');
+		return false;
+	}
+	console.log('链接数据库成功');
 });
 
 app.listen(app.get('port'), (err) => {
@@ -21,11 +35,3 @@ app.listen(app.get('port'), (err) => {
 	}
 	console.log('server running http://10.0.15.31:3000');
 });
-
-
-// git pull --rebase origin master
-// git remote rm origin
-
-
-
-cannot pull with rebase: You have unstaged changes. please commit or stash them.
