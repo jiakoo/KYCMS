@@ -14,7 +14,9 @@ app.get('/admin', function(req, res) {
 	res.render('index');
 });
 
+
 app.use('/admin/column', require('./routers/column_router'));
+// app.get('/admin/column', require('./routers/column_router'));
 app.use('/admin/content', require('./routers/content_router'));
 
 

@@ -1,0 +1,73 @@
+
+body {
+	color: #fff;
+}
+
+.wrap {
+	position: relative;
+	background: url('/static/img/index_bg.jpg') center center no-repeat;
+	background-size: cover;
+	z-index: -1;
+
+}
+.wrap:before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: #191919;
+	opacity: .8;
+}
+
+.nav {
+	position: absolute;
+	top: 50px;
+	left: 0;
+	width: 100%;
+}
+
+.nav ul {
+	display: flex;
+	width: 50%;
+	margin: 0 auto;
+}
+
+.nav ul li {
+	list-style: none;
+	flex-grow: 1;
+}
+
+.nav a {
+	/*padding: 0 20px;*/
+	line-height: 24px;
+	cursor: pointer;
+}
+
+.title {
+	width: 980px;
+	height: 500px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin-top: -250px;
+	margin-left: -450px;
+	padding-top: 40px;
+	text-align: center;
+}
+
+.title1 {
+	font-size: 48px;
+	line-height: 48px;
+}
+
+.title12 {
+	font-size: 50px;
+	line-height: 70px;
+}
+
+a {
+	color: #fff;
+	z-index: 100;	
+}
