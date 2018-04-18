@@ -1,0 +1,80 @@
+const Column = require('../models/column');
+const createCio = (req,res)=>{
+  const instanceCio = new Column(req.body)
+  instanceCio.save()
+              .then(work=>{
+                res.send({
+                  status:1,
+                  msg:"success",
+                  data:''
+                })
+              })
+              .catch(err=>{
+                res.send({
+                  status:-1,
+                  msg:"err",
+                  data:err.message.toString()
+                })
+              })
+}
+const getCio = (req,res)=>{
+    Column.find({})
+          .exec()
+          .then(works=>{
+            res.send({
+              status:1,
+              msg:"success",
+              data:works
+            })
+          })
+          .catch(err=>{
+            res.send({
+              status:-1,
+              msg:"err",
+              data:err.message.toString()
+            })
+          })
+}
+const updateCio = (req,res)=>{
+    Column.update({_id:req.body._id},req.body)
+          .exec()
+          .then(re=>{
+            console.log(re)
+            res.send({
+              status:1,
+              msg:"success",
+              data:""
+            })
+          })
+          .catch(err=>{
+            res.send({
+              status:-1,
+              msg:"err",
+              data:err.message.toString()
+            })
+          })       
+}
+const deleteCio = (req,res)=>{
+  console.log(req.query.id)
+  Column.remove({_id:req.query.id})
+            .then(re=>{
+              res.send({
+                status:1,
+                msg:"success",
+                data:''
+              })
+            })
+            .catch(err=>{
+              res.send({
+                status:-1,
+                msg:"err",
+                data:err.message.toString()
+              })
+            })
+}
+module.exports = {
+  createCio,
+  getCio,
+  updateCio,
+  deleteCio
+}
