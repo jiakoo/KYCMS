@@ -1,7 +1,18 @@
 doctype html
 html(lang="en")
-head
-	meta(charset="UTF-8")
-	title 官网后台管理系统
-body
-	h1 内容管理
+	head
+		meta(charset="UTF-8")
+		link(rel="stylesheet" type="text/css" href="/static/editor/wangEditor.min.css")
+		script(src="/static/jquery/jquery.js")
+		script(src="/static/editor/wangEditor.min.js")
+		title 官网后台管理系统
+	body
+		h1 内容管理
+		div 选择栏目
+		div(id="editor") 编辑器
+		button(id="btn1") 获取 html
+		br
+		button(id="btn3") 删除
+		br
+		a(href="/admin/content/list") 查看列表	
+	script(src="/static/js/content.js")
