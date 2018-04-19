@@ -10,7 +10,7 @@ app.set('view engine', 'pug');
 app.use('/static', express.static('public'));
 
 // 首页路由
-app.get('/admin', function(req, res) {
+app.get('/', function(req, res) {
 	res.render('index');
 });
 
