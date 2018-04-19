@@ -9,8 +9,13 @@ app.set('views', './views');
 app.set('view engine', 'pug');
 // 设置静态资源托管
 app.use('/static', express.static('public'));
-app.use(bodyParser.urlencoded({extend: false}));
+
+
+//post解析
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+
+
 // 首页路由
 app.get('/', function(req, res) {
 	res.render('index');

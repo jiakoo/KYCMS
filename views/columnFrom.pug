@@ -1,0 +1,29 @@
+doctype html
+html(lang="en")
+    head
+        meta(http-equiv="Content-Type", content="text/html;charset=UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="ie=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        link(rel="stylesheet", href="/static/bootstrap/css/bootstrap.min.css")
+        link(rel="stylesheet", href="/static/css/column.css")
+        script(src="/static/jquery/jquery.js")
+        script(src="/static/js/column.js")
+        title 官网后台管理系统
+    body
+    h1(class="colum-title") 栏目管理新增
+    div(class="container columnFrom")
+        form(action="/admin/column/createcolumn" method="post" class="form-horizontal column" onsubmit='return checkFrom()')
+            input(type="hidden"  name="_id"  value=data._id)
+            div(class="form-group" )
+                label 同级排序
+                input(type="text" class="form-control" name="orderNo"  value=data.orderNo)
+            div(class="form-group" )
+                label 名称
+                input(type="text" class="form-control" name="name" value=data.name)
+            div(class="form-group" )
+                label 目录名称
+                input(type="text" class="form-control" name="Catalog" value=data.Catalog) 
+            div(class="form-group")
+                label 标识自身
+                input(type="text" class="form-control" name="Id" value=data.Id)
+            button(class="btn btn-info" type="submit") 提交          

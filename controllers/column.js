@@ -1,13 +1,46 @@
 const Column = require('../models/column');
+
+//查
+const getFirst =(req,res)=>{
+   Column.find({})
+         .exec()
+         .then(data=>{
+            res.render('columnList',{
+                data:data 
+            })
+            // res.send(data);
+         })
+         .catch(err=>{
+          res.send({
+            status:-1,
+            msg:"err",
+            data:err.message.toString()
+          })
+        })
+}
+
+//增
+const getFrom =(req,res)=>{
+  var data = {
+    orderNo:'',
+    name:'',
+    Catalog:'',
+    Id:''
+}
+  res.render('columnFrom',{
+      data:data
+  });
+}
+
+//存 更
 const createCio = (req,res)=>{
-  const instanceCio = new Column(req.body)
-  instanceCio.save()
-              .then(work=>{
-                res.send({
-                  status:1,
-                  msg:"success",
-                  data:''
-                })
+    const data = req.body;
+    var id = req.body._id;
+    if(id){
+        Column.update({_id:req.body._id}, req.body,{ multi: true })
+              .exec()
+              .then(re=>{
+                 res.redirect('/admin/column')
               })
               .catch(err=>{
                 res.send({
@@ -16,53 +49,45 @@ const createCio = (req,res)=>{
                   data:err.message.toString()
                 })
               })
+    }else{
+        const instanceCio = new Column({
+          orderNo:data.orderNo,
+          name:data.name,
+          Catalog:data.Catalog,
+          Id:data.Id
+        })
+        instanceCio.save()
+                    .then(data=>{
+                      res.redirect('/admin/column')
+                    })
+                    .catch(err=>{
+                      res.send({
+                        status:-1,
+                        msg:"err",
+                        data:err.message.toString()
+                      })
+                    })
+    }
 }
-const getCio = (req,res)=>{
-    Column.find({})
-          .exec()
-          .then(works=>{
-            res.send({
-              status:1,
-              msg:"success",
-              data:works
-            })
-          })
-          .catch(err=>{
-            res.send({
-              status:-1,
-              msg:"err",
-              data:err.message.toString()
-            })
-          })
-}
+
+//改
 const updateCio = (req,res)=>{
-    Column.update({_id:req.body._id},req.body)
-          .exec()
-          .then(re=>{
-            console.log(re)
-            res.send({
-              status:1,
-              msg:"success",
-              data:""
-            })
-          })
-          .catch(err=>{
-            res.send({
-              status:-1,
-              msg:"err",
-              data:err.message.toString()
-            })
-          })       
+    var id = req.params.id
+    if(id){
+      Column.findById(id,function(err,data){
+        res.render('columnFrom',{
+          data: data
+        })
+      })
+    }  
 }
+
+//删
 const deleteCio = (req,res)=>{
-  console.log(req.query.id)
-  Column.remove({_id:req.query.id})
+  var id = req.query.id
+  Column.remove({_id:id})
             .then(re=>{
-              res.send({
-                status:1,
-                msg:"success",
-                data:''
-              })
+              res.json({success:1})
             })
             .catch(err=>{
               res.send({
@@ -72,9 +97,11 @@ const deleteCio = (req,res)=>{
               })
             })
 }
+
 module.exports = {
   createCio,
-  getCio,
   updateCio,
-  deleteCio
+  deleteCio,
+  getFirst,
+  getFrom
 }

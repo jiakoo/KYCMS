@@ -2,8 +2,9 @@ const express = require('express');
 const router = express.Router();
 const column = require('../controllers/column');
 
-router.get("/column",column.getCio)
-router.post("/column",column.createCio)
-router.put("/column",column.updateCio)
-
+router.get("/",column.getFirst)
+router.get("/columnFrom",column.getFrom)
+router.post("/createcolumn",column.createCio)
+router.get("/update/:id",column.updateCio)
+router.get("/delete",column.deleteCio)
 module.exports = router
