@@ -1,7 +1,10 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const multer = require('multer');
+const fs = require('fs');
 const app = express();
+
 // 设置端口
 app.set('port', process.env.PORT || 3000);
 // 设置模板引擎 
@@ -15,6 +18,8 @@ app.use('/static', express.static('public'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
+//上传文件设置
+// const upload = multer({ dest: 'upload/' });
 
 // 首页路由
 app.get('/', function(req, res) {
@@ -23,7 +28,6 @@ app.get('/', function(req, res) {
 
 
 app.use('/admin/column', require('./routers/column_router'));
-// app.get('/admin/column', require('./routers/column_router'));
 app.use('/admin/content', require('./routers/content_router'));
 
 

@@ -1,8 +1,8 @@
 const Column = require('../models/column');
-
+var  FileSol = require('../until/index');
 //查
 const getFirst =(req,res)=>{
-   Column.find({})
+   Column.find({}).sort({'orderNo':1})
          .exec()
          .then(data=>{
             res.render('columnList',{
@@ -25,7 +25,8 @@ const getFrom =(req,res)=>{
     orderNo:'',
     name:'',
     Catalog:'',
-    Id:''
+    Id:'',
+    parentId:''
 }
   res.render('columnFrom',{
       data:data
@@ -36,10 +37,27 @@ const getFrom =(req,res)=>{
 const createCio = (req,res)=>{
     const data = req.body;
     var id = req.body._id;
+    var file = req.file;
+    console.log(req.body);
+    if(file){
+      var imgpath = FileSol.imgUrl(file);
+    }else{
+      var imgpath = req.body.oldfile;
+    }
+    var NewD = {
+        orderNo:data.orderNo,
+        name:data.name,
+        Catalog:data.Catalog,
+        Id:data.Id,
+        parentId:data.parentId,
+        flieImg:imgpath
+    }
     if(id){
-        Column.update({_id:req.body._id}, req.body,{ multi: true })
+        Column.update({_id:req.body._id}, NewD,{ multi: true })
               .exec()
               .then(re=>{
+                 FileSol.reName(imgpath)
+                if(file){FileSol.delFile(req.body.oldfile)} 
                  res.redirect('/admin/column')
               })
               .catch(err=>{
@@ -54,10 +72,13 @@ const createCio = (req,res)=>{
           orderNo:data.orderNo,
           name:data.name,
           Catalog:data.Catalog,
-          Id:data.Id
+          Id:data.Id,
+          parentId:data.parentId,
+          flieImg:imgpath
         })
         instanceCio.save()
                     .then(data=>{
+                      FileSol.reName(imgpath)
                       res.redirect('/admin/column')
                     })
                     .catch(err=>{

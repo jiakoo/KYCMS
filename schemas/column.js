@@ -4,10 +4,11 @@ const mongoose =  require('mongoose');
 const column = new mongoose.Schema({
     //栏目的名称
     name:String,
-    parentId:Number,
-    orderNo:Number,
-    Id:Number,
-    Catalog:String
+    parentId:String,
+    orderNo:String,
+    Id:String,
+    Catalog:String,
+    flieImg:String
 })
 
 module.exports  = column;

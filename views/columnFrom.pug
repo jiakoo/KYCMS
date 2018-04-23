@@ -12,8 +12,9 @@ html(lang="en")
     body
     h1(class="colum-title") 栏目管理新增
     div(class="container columnFrom")
-        form(action="/admin/column/createcolumn" method="post" class="form-horizontal column" onsubmit='return checkFrom()')
+        form(action="/admin/column/createcolumn" method="post" class="form-horizontal column"  enctype="multipart/form-data" onsubmit='return checkFrom()')
             input(type="hidden"  name="_id"  value=data._id)
+            input(type="hidden"  name="oldfile"  value=data.flieImg)
             div(class="form-group" )
                 label 同级排序
                 input(type="text" class="form-control" name="orderNo"  value=data.orderNo)
@@ -26,4 +27,11 @@ html(lang="en")
             div(class="form-group")
                 label 标识自身
                 input(type="text" class="form-control" name="Id" value=data.Id)
+            div(class="form-group")
+                label 父级标识
+                input(type="text" class="form-control" name="parentId" value=data.parentId)
+            div(class="form-group")
+                label 上传图片
+                input(type="file"  name="avatar")
+            img(src= data.flieImg, alt="")    
             button(class="btn btn-info" type="submit") 提交          

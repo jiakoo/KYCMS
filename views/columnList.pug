@@ -20,9 +20,10 @@ html(lang="en")
                     tr
                         th  排序
                         th  名称
-                        th  所属模块
+                        //- th  所属模块
                         th  目录名称
                         th  标识
+                        th  父级标识
                         th  操作
                 tbody
                 each val in data
@@ -30,9 +31,10 @@ html(lang="en")
                     tr( data-id=val._id)
                         td  #{val.orderNo}
                         td  #{val.name}
-                        td  无
+                        //- td  无
                         td  #{val.Catalog}
                         td  #{val.Id}
+                        td  #{val.parentId}
                         td
                             a(class="btn btn-info btn-sm " href="/admin/column/update/"+val._id) 修改  
                             a(class="btn btn-danger btn-sm del"  data-id=val._id) 删除
